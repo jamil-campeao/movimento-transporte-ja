@@ -57,12 +57,15 @@ formulario.addEventListener('submit', async (event) => {
         formData.append('anexos', anexo);
     }
     
-    // --- Envio os Dados para a API ---
-    const apiUrl = '/api/submit';
+    const apiUrl = 'https://movimento-transporte-ja-production.up.railway.app/relatos';
+    const apiKey = 'x+!1/M*Q#81$b:%A?';
 
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
+            headers: {
+                'token': apiKey,
+            },
             body: formData
         });
 
