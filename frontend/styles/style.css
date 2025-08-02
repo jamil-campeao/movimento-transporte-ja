@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #28A745;
+    --cor-texto-footer: #fff;
+    --cor-de-fundo-body: #f4f4f4;
+    --cor-preta: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: var(--cor-de-fundo-body);
+    color: var(--cor-preta);
+}
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+header, footer {
+    background-color: var(--cor-preta);
+    color: var(--cor-texto-footer);
+    padding: 20px 0;
+    text-align: center;
+    text-decoration: none;
+}
+nav {
+    background: #444;
+    padding: 10px 0;
+}
+nav ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+nav a {
+    color: var(--cor-texto-footer);
+    text-decoration: none;
+}
+section {
+    background: var(--cor-texto-footer);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+form label {
+    display: block;
+    margin-top: 10px;
+}
+form input, form textarea, form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+form button {
+    background-color: var(--cor-preta);
+    color: var(--cor-texto-footer);
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.footer__credit__links {
+    text-decoration: none;
+    color: var(--cor-texto-footer);
+}

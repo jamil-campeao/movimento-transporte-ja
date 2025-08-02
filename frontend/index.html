@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transporte Público FW: Nossa Luta por um Serviço Digno</title>
+    <meta name="description" content="Plataforma da comissão de estudantes sobre os problemas do transporte público em Frederico Westphalen e a mobilização por soluções.">
+    
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Transporte Público em Frederico Westphalen</h1>
+            <p class="subtitulo">A nossa luta por um serviço digno, seguro e transparente.</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#problemas">Problemas Atuais</a></li>
+                <li><a href="#contexto">Entenda o Caso</a></li>
+                <li><a href="#reclamacoes">Faça sua Reclamação</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <section id="problemas">
+            <h2>Problemas Atuais</h2>
+            <p>Estes são alguns dos problemas mais graves enfrentados diariamente pelos usuários do transporte público em nossa cidade.</p>
+            
+            <div class="problema-card">
+                <h3>Manutenção Precária dos Veículos</h3>
+                <p>Registros constantes de goteiras, portas que não fecham corretamente, assentos quebrados e falta de segurança geral nos ônibus.</p>
+            </div>
+
+            <div class="problema-card">
+                <h3>Limitação na Venda de Passagens</h3>
+                <p>A prática de limitar a venda a 30 passagens por viagem deixa estudantes e trabalhadores para trás, gerando insegurança e custos adicionais.</p>
+            </div>
+
+            <div class="problema-card">
+                <h3>Falta de Transparência</h3>
+                <p>A comunidade não tem acesso ao contrato de concessão e não sabe quais são as obrigações reais da empresa e os deveres de fiscalização da Prefeitura.</p>
+            </div>
+            </section>
+
+        <section id="contexto">
+            <h2>Entenda o Caso: A Crise do Transporte para o IFFAR/UFSM</h2>
+            <p>A situação atual é resultado de uma série de eventos que demonstram a fragilidade e a precariedade do serviço. Abaixo, uma contextualização dos fatos recentes que levaram à mobilização.</p>
+            
+            <div class="timeline">
+                <p><strong>18/07/2025 (sexta-feira):</strong> O proprietário da empresa comunicou à Professora Silvana a possibilidade de paralisação do serviço, alegando dificuldades financeiras e falta de atendimento da prefeitura. A Direção do IFFar buscou audiência para mediar a situação.</p>
+
+                <p><strong>21/07/2025 (segunda-feira):</strong> A Gestão do Campus IFFar contatou o Secretário de Administração do município para solicitar informações sobre as providências para evitar a paralisação.</p>
+
+                <p><strong>22/07/2025 (terça-feira):</strong> O Sr. Diogo Mazonetto, proprietário da empresa, confirmou em áudio que, sem o reequilíbrio financeiro, o serviço seria paralisado já no turno da noite. A partir disso, o Secretário de Administração, Sr. Ernesto Tarcísio Baggio, esclareceu pontos importantes:</p>
+                <ul>
+                    <li>O contrato de concessão original foi feito na gestão anterior.</li>
+                    <li>A empresa que detinha a concessão faliu.</li>
+                    <li>A empresa atual (Empresa Urbano) assumiu de forma provisória, **sem licitação legal**.</li>
+                    <li>A gestão atual da prefeitura deseja regularizar a situação com uma nova licitação.</li>
+                </ul>
+
+                <p><strong>Ainda em 22/07:</strong> A gestão do IFFar apelou diretamente ao Sr. Diogo pela manutenção do serviço até o fim do semestre (01/08). O empresário concordou em manter o serviço, mas com horários reduzidos.</p>
+
+                <p><strong>Final da tarde de 22/07:</strong> A prefeitura informou que um novo processo licitatório será aberto e que os serviços da Empresa Urbano continuarão até sua finalização, com um reajuste na tarifa para atender às necessidades da empresa.</p>
+            </div>
+        </section>
+
+        <section id="reclamacoes">
+            <h2>Faça sua Reclamação</h2>
+            <p>Sua voz é fundamental. Use este espaço para registrar problemas, enviar fotos e nos ajudar a construir um dossiê completo. Juntos, temos mais força!</p>
+
+            <form action="/enviar-reclamacao" method="POST" enctype="multipart/form-data">
+                <label for="nome">Seu Nome (Opcional):</label>
+                <input type="text" id="nome" name="nome">
+
+                <label for="contato">Seu Contato (Email ou WhatsApp, Opcional):</label>
+                <input type="text" id="contato" name="contato">
+
+                <label for="data_ocorrido">Data do Ocorrido:</label>
+                <input type="date" id="data_ocorrido" name="data_ocorrido" required>
+                
+                <label for="linha_onibus">Linha do Ônibus (se souber):</label>
+                <input type="text" id="linha_onibus" name="linha_onibus">
+
+                <label for="relato">Seu Relato:</label>
+                <textarea id="relato" name="relato" rows="8" placeholder="Descreva o problema em detalhes: o que aconteceu, onde, qual era a condição do veículo, etc." required></textarea>
+
+                <label for="arquivo">Envie uma foto ou vídeo (opcional):</label>
+                <input type="file" id="arquivo" name="arquivo" accept="image/*,video/*">
+
+                <button type="submit">Enviar Reclamação</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Comissão de Estudantes e Docentes da UFSM e IFFAR. Todos os direitos reservados à comunidade.</p>
+            <p class="footer__credit">Desenvolvido por <a class="footer__credit__links" href="https://github.com/bzisa">Isadora</a> e <a class="footer__credit__links" href="https://github.com/jamil-campeao">Jamil Campeão</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
