@@ -185,7 +185,7 @@ form button:hover {
 
 .logo {
     /* Define uma altura fixa para que ambos tenham o mesmo "peso" visual */
-    height: 80px; 
+    height: 100px; 
     
     /* Largura automática para não distorcer a imagem */
     width: auto; 
@@ -214,4 +214,73 @@ form button:hover {
     .logo {
         height: 50px; /* Deixa os logos ainda menores */
     }
+}
+
+/* 1. Grid responsivo para os cards de problemas */
+
+#problemas > h2 {
+    margin-bottom: 15px;
+}
+
+#problemas > p {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.problema-card {
+    background: #2a3a4f;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    display: flex;         
+    flex-direction: column;
+    margin-bottom: 15px;
+}    
+
+.problema-card h3 {
+    margin-bottom: 10px;
+}
+
+/* 2. Responsividade para a linha do tempo */
+.timeline ul {
+    padding-left: 20px;
+}
+.timeline p, .timeline li {
+    font-size: 16px;
+    line-height: 1.5;
+}
+@media (max-width: 600px) {
+    .timeline p, .timeline li {
+        font-size: 14px;
+    }
+}
+
+/* 3. Ajustes de formulário em telas pequenas */
+@media (max-width: 600px) {
+    form button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    form label {
+        font-size: 14px;
+    }
+
+    form input, form textarea, #instituicao {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* 4. Cards com as reclamações */
+
+.card-rec {
+    background: #2a3a4f;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    display: flex;         
+    flex-direction: column;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
