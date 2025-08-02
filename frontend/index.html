@@ -11,6 +11,11 @@
 <body>
 
     <header>
+        <div class="logo-container">
+            <img src="./assets/imgs/logo-if-fw.jpg" alt="Logotipo do IFFAR" class="logo">
+            <img src="./assets/imgs/logo-ufsm-fw.png" alt="Logotipo da UFSM" class="logo">
+        </div>
+
         <div class="container">
             <h1>Transporte Público em Frederico Westphalen</h1>
             <p class="subtitulo">A nossa luta por um serviço digno, seguro e transparente.</p>
@@ -40,7 +45,7 @@
 
             <div class="problema-card">
                 <h3>Limitação na Venda de Passagens</h3>
-                <p>A prática de limitar a venda a 30 passagens por viagem deixa estudantes e trabalhadores para trás, gerando insegurança e custos adicionais.</p>
+                <p>A prática de limitar a venda passagens por viagem deixa estudantes e trabalhadores para trás, gerando insegurança e custos adicionais.</p>
             </div>
 
             <div class="problema-card">
@@ -77,20 +82,24 @@
             <p>Sua voz é fundamental. Use este espaço para registrar problemas, enviar fotos e nos ajudar a construir um dossiê completo. Juntos, temos mais força!</p>
 
             <form action="/enviar-reclamacao" method="POST" enctype="multipart/form-data">
-                <label for="nome">Seu Nome (Opcional):</label>
-                <input type="text" id="nome" name="nome">
+                <label for="nome">Seu Nome:</label>
+                <input type="text" id="nome" name="nome" required maxlength="100">
 
-                <label for="contato">Seu Contato (Email ou WhatsApp, Opcional):</label>
-                <input type="text" id="contato" name="contato">
+                <label for="instituicao">Instituição:</label>
+                <select name="combo-instituicao" id="instituicao">
+                <option value="ufsm">UFSM</option>
+                <option value="if">IFFAR</option>
+                <option value="outra">Outra</option>
+                </select>
+
+                <label for="contato">Seu Contato (Email ou WhatsApp):</label>
+                <input type="text" id="contato" name="contato" required maxlength="200">
 
                 <label for="data_ocorrido">Data do Ocorrido:</label>
                 <input type="date" id="data_ocorrido" name="data_ocorrido" required>
-                
-                <label for="linha_onibus">Linha do Ônibus (se souber):</label>
-                <input type="text" id="linha_onibus" name="linha_onibus">
 
                 <label for="relato">Seu Relato:</label>
-                <textarea id="relato" name="relato" rows="8" placeholder="Descreva o problema em detalhes: o que aconteceu, onde, qual era a condição do veículo, etc." required></textarea>
+                <textarea id="relato" name="relato" rows="8" placeholder="Descreva o problema em detalhes: o que aconteceu, onde, qual era a condição do veículo, etc." required maxlength="2000"></textarea>
 
                 <label for="arquivo">Envie uma foto ou vídeo (opcional):</label>
                 <input type="file" id="arquivo" name="arquivo" accept="image/*,video/*">

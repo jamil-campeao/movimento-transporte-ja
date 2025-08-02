@@ -1,77 +1,217 @@
+/* Reset Básico */
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Boa prática para o layout não quebrar com padding e bordas */
 }
 
+/* 1. DEFINIÇÃO DA NOVA PALETA DE CORES
+   - Usamos cores mais próximas das oficiais das instituições.
+   - Variáveis com nomes mais claros para facilitar a manutenção.
+*/
+
+/* OPÇÃO 2: TEMA FRIO E INDUSTRIAL (CLARO, MAS IMPESSOAL) */
 :root {
-    --primary-color: #007BFF;
-    --secondary-color: #28A745;
-    --cor-texto-footer: #fff;
-    --cor-de-fundo-body: #f4f4f4;
-    --cor-preta: #333;
+    --cor-primaria-ufsm: #007bff;      /* Deixamos o azul mais vibrante para contrastar com o fundo */
+    --cor-secundaria-iffar: #28a745;   /* Deixamos o verde mais vibrante também */
+    
+    /* A grande mudança está aqui */
+    --cor-fundo-geral: #17212f;        /* Fundo azul-marinho muito escuro, frio */
+    --cor-fundo-secao: #1d293a;       /* Fundo das seções um pouco mais claro */
+    
+    --cor-texto-principal: #e0e0e0;     /* Texto principal agora é cinza claro, não branco puro */
+    --cor-texto-titulos: #ffffff;      /* Títulos podem ser branco puro para mais destaque */
+    
+    --cor-borda-padrao: #41506b;      /* Borda mais clara para aparecer no fundo escuro */
 }
 
+/* 2. APLICAÇÃO DA PALETA NOS ELEMENTOS GERAIS */
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
-    margin: 0;
-    background-color: var(--cor-de-fundo-body);
-    color: var(--cor-preta);
+    background-color: var(--cor-fundo-geral);
+    color: var(--cor-texto-principal);
 }
+
 .container {
     width: 80%;
+    max-width: 960px; /* Adicionado um max-width para telas muito grandes */
     margin: auto;
     overflow: hidden;
     padding: 0 20px;
 }
-header, footer {
-    background-color: var(--cor-preta);
-    color: var(--cor-texto-footer);
+
+/* 3. ESTILIZAÇÃO DO HEADER E FOOTER COM AS CORES NOVAS */
+header {
+    background-color: var(--cor-primaria-ufsm); /* Header com a cor principal */
+    color: var(--cor-texto-claro);
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer {
+    background-color: var(--cor-secundaria-iffar); /* Footer com a cor secundária */
+    color: var(--cor-texto-claro);
     padding: 20px 0;
     text-align: center;
-    text-decoration: none;
+    margin-top: 30px;
 }
+
+/* 4. NAVBAR E LINKS */
 nav {
-    background: #444;
+    background: #4a4a4a; /* Um cinza neutro para a barra de navegação */
     padding: 10px 0;
+    position: sticky; /* Efeito "grudento" no topo da página ao rolar */
+    top: 0;
+    z-index: 100;
 }
+
 nav ul {
     padding: 0;
     list-style: none;
     text-align: center;
 }
+
 nav ul li {
     display: inline;
-    margin-right: 20px;
-}
-nav a {
-    color: var(--cor-texto-footer);
-    text-decoration: none;
-}
-section {
-    background: var(--cor-texto-footer);
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-}
-form label {
-    display: block;
-    margin-top: 10px;
-}
-form input, form textarea, form button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-}
-form button {
-    background-color: var(--cor-preta);
-    color: var(--cor-texto-footer);
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
+    margin: 0 15px;
 }
 
+nav a {
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--cor-secundaria-iffar); /* Link da nav fica verde ao passar o mouse */
+}
+
+/* 5. CONTEÚDO PRINCIPAL (SECTIONS) */
+section {
+    background: var(--cor-fundo-secao);
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil para destacar a seção */
+}
+
+/* Títulos das seções ganham a cor primária */
+section h2 {
+    color: var(--cor-primaria-ufsm);
+    margin-bottom: 15px;
+}
+
+
+/* 6. FORMULÁRIOS ESTILIZADOS COM A NOVA PALETA */
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input, 
+form textarea, 
+#instituicao {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid var(--cor-borda-padrao);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Feedback visual ao clicar em um campo do formulário */
+form input:focus, 
+form textarea:focus, 
+#instituicao:focus {
+    outline: none;
+    border-color: var(--cor-primaria-ufsm);
+    box-shadow: 0 0 5px rgba(0, 90, 156, 0.3);
+}
+
+/* Botão de Envio agora usa a cor secundária */
+form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: var(--cor-secundaria-iffar); /* Botão verde, chamativo */
+    color: var(--cor-texto-claro);
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #007a33; /* Um tom de verde um pouco mais escuro */
+}
+
+/* Estilização da combobox #instituicao */
+#instituicao {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23005A9C%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: 14px auto;
+}
+
+/* Links do footer */
 .footer__credit__links {
     text-decoration: none;
-    color: var(--cor-texto-footer);
+    color: var(--cor-texto-claro);
+}
+
+.footer__credit__links:hover {
+    text-decoration: underline;
+}
+
+
+/* --- Estilos para os Logos --- */
+
+.logo-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 30px; 
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    /* Define uma altura fixa para que ambos tenham o mesmo "peso" visual */
+    height: 80px; 
+    
+    /* Largura automática para não distorcer a imagem */
+    width: auto; 
+    
+    /* Garante que o logo não fique gigante e quebre o layout */
+    max-width: 45%; 
+    
+    /* Transição suave para a mudança de tamanho */
+    transition: height 0.3s ease;
+}
+
+/* Para telas menores que 768px (tablets e celulares) */
+@media (max-width: 768px) {
+    .logo {
+        /* Diminui a altura dos logos em telas menores */
+        height: 60px; 
+    }
+
+    .logo-container {
+        gap: 20px; /* Diminui o espaço entre eles */
+    }
+}
+
+/* Para telas muito pequenas (celulares em modo retrato) */
+@media (max-width: 480px) {
+    .logo {
+        height: 50px; /* Deixa os logos ainda menores */
+    }
 }
