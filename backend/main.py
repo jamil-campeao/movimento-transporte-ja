@@ -88,15 +88,15 @@ async def criar_relato(
 
 # Rota para listar todos os relatos (sem os dados das imagens)
 @app.get("/relatos/all", response_model=List[schemas.Relato])
-def listar_relatos(db: Session = Depends(get_db),
+def listar_todos_relatos(db: Session = Depends(get_db),
                    api_key: str = Depends(get_api_key)
 ):
     relatos = db.query(models.Relato).all()
     return relatos
 
 
-@app.get("/relatos/", response_model=List[schemas.Relato])
-def listar_relatos(db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
+@app.get("/relatos/newest", response_model=List[schemas.Relato])
+def listar_ultimos_relatos(db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
     """
     Retorna os 7 relatos mais recentes, já incluindo seus anexos.
     """
