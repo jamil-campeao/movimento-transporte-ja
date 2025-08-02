@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   try {
     const apiKey = process.env.API_KEY;
-    const apiUrl = 'https://movimento-transporte-ja-production.up.railway.app/relatos';
+    const apiUrl = 'https://movimento-transporte-ja-production.up.railway.app/relatos/';
 
     if (!apiKey || !apiUrl) {
       throw new Error('Variáveis de ambiente não configuradas no servidor.');
