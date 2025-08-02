@@ -1,6 +1,6 @@
 # models.py
 from sqlalchemy import Column, Integer, String, LargeBinary
-from .database import Base
+from database import Base
 
 class Relato(Base):
     __tablename__ = "relatos"

@@ -2,9 +2,9 @@
 from fastapi import FastAPI, File, UploadFile, Form, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from typing import Optional, List
-
-from . import models, schemas
-from .database import engine, get_db
+import models
+import schemas
+from database import engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
 
