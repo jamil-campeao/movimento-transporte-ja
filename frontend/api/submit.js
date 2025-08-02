@@ -31,6 +31,7 @@ export default async function handler(req, res) {
         'token': apiKey,
       },
       body: req,
+      duplex: 'half',
     });
 
 
