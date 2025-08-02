@@ -1,12 +1,39 @@
 # main.py
-from fastapi import FastAPI, File, UploadFile, Form, Depends, HTTPException, Response
+from fastapi import FastAPI, File, UploadFile, Form, Depends, HTTPException, Response, Security
+from fastapi.security import APIKeyHeader
 from sqlalchemy.orm import Session
 from typing import Optional, List
 import models
 import schemas
 from database import engine, get_db
+import os
+import secrets
+from dotenv import load_dotenv
+
+load_dotenv()
 
 models.Base.metadata.create_all(bind=engine)
+
+API_KEY_SECRET = os.getenv("API_KEY")
+
+if not API_KEY_SECRET:
+    raise Exception("API_KEY not found in .env file")
+
+# Define o nome do cabeçalho que o cliente deve enviar
+API_KEY_NAME = "token"
+
+
+# Cria o esquema de segurança que o FastAPI usará para extrair a chave
+api_key_header_auth = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
+
+async def get_api_key(api_key: str = Security(api_key_header_auth)):
+    """Verifica se a chave de API enviada no cabeçalho é válida."""
+    # Usamos `secrets.compare_digest` para uma comparação segura contra ataques de tempo
+    if not secrets.compare_digest(api_key, API_KEY_SECRET):
+        raise HTTPException(
+            status_code=403,
+            detail="Acesso negado: Chave de API inválida ou ausente."
+        )
 
 app = FastAPI(
     title="API de Relatos - Transporte Público FW",
@@ -20,7 +47,8 @@ async def criar_relato(
     nome: str = Form(...),
     relato_texto: str = Form(...),
     contato: Optional[str] = Form(None),
-    anexo: Optional[UploadFile] = File(None)
+    anexo: Optional[UploadFile] = File(None),
+    api_key: str = Depends(get_api_key)
 ):
     """
     Cria um novo relato, salvando o anexo diretamente no banco de dados.
@@ -51,12 +79,16 @@ async def criar_relato(
 
 # Rota para listar todos os relatos (sem os dados das imagens)
 @app.get("/relatos/", response_model=List[schemas.Relato])
-def listar_relatos(db: Session = Depends(get_db)):
+def listar_relatos(db: Session = Depends(get_db),
+                   api_key: str = Depends(get_api_key)
+):
     relatos = db.query(models.Relato).all()
     return relatos
 
 @app.get("/relatos/{relato_id}/anexo")
-async def obter_anexo_do_relato(relato_id: int, db: Session = Depends(get_db)):
+async def obter_anexo_do_relato(relato_id: int, db: Session = Depends(get_db),
+                                api_key: str = Depends(get_api_key)
+):
     """
     Busca um relato pelo ID e retorna seu anexo como uma resposta de imagem.
     """
