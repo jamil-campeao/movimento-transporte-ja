@@ -10,6 +10,7 @@ import os
 import secrets
 from dotenv import load_dotenv
 import datetime
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
@@ -39,6 +40,16 @@ async def get_api_key(api_key: str = Security(api_key_header_auth)):
 app = FastAPI(
     title="API de Relatos - Transporte Público FW",
     description="API para receber e armazenar relatos dos usuários sobre o transporte público."
+)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
