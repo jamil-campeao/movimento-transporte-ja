@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': req.headers['content-type'],
+        'Content-Type': 'multipart/form-data',
         'token': apiKey,
       },
       body: req,
