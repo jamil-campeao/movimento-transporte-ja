@@ -284,3 +284,35 @@ form button:hover {
     margin-bottom: 15px;
     margin-top: 15px;
 }
+
+
+/* Estilo para o container que agrupa as imagens (caso haja mais de uma) */
+.anexos-container {
+    display: flex;          /* Usa flexbox para alinhar as imagens */
+    flex-direction: column; /* Coloca as imagens uma abaixo da outra se houver mais de uma */
+    gap: 10px;              /* Espaço entre as imagens */
+    margin-top: 15px;       /* Espaço entre o texto do relato e as imagens */
+}
+
+/* Estilo para CADA imagem de anexo */
+.anexos-container img {
+
+    /* A imagem ocupará 100% da largura do card */
+    width: 100%; 
+    
+    /* MAS, ela nunca ficará maior que 450px de largura em telas grandes */
+    max-width: 450px; 
+    
+    /* Altura automática para não distorcer a imagem */
+    height: auto; 
+    
+    /* Garante que a imagem se comporte como um bloco e não tenha espaços estranhos */
+    display: block; 
+    
+    /* Um toque de design para arredondar as bordas */
+    border-radius: 8px; 
+    
+    /* Centraliza a imagem dentro do card */
+    margin-left: auto;
+    margin-right: auto;
+}
