@@ -112,7 +112,7 @@ formulario.addEventListener('submit', async (event) => {
 
 // --- CÓDIGO PARA CARREGAR E EXIBIR OS RELATOS RECENTES ---
 
-formulario.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     carregarRelatosRecentes();
 });
 
