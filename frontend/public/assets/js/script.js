@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function carregarRelatosRecentes() {
     const secaoRecenviadas = document.getElementById('recenviadas');
+
+    //Limpo a seção
+    secaoRecenviadas.innerHTML = '';
     
     // --- Definições da API ---
     const endpointRelatos = 'https://movimento-transporte-ja-production.up.railway.app/relatos/newest';
