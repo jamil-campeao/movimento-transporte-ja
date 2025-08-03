@@ -103,6 +103,7 @@ formulario.addEventListener('submit', async (event) => {
         console.log('Sucesso:', result);
         alert('Relato enviado com sucesso! Obrigado por sua contribuição.');
         formulario.reset();
+        carregarRelatosRecentes();
 
     } catch (error) {
         console.error('Erro ao enviar o formulário:', error);
@@ -113,6 +114,16 @@ formulario.addEventListener('submit', async (event) => {
 // --- CÓDIGO PARA CARREGAR E EXIBIR OS RELATOS RECENTES ---
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    const dataOcorridoInput = document.getElementById('data_ocorrido');
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const dataMaxima = `${ano}-${mes}-${dia}`;
+    dataOcorridoInput.max = dataMaxima;
+
+
     carregarRelatosRecentes();
 });
 
