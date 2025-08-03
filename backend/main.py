@@ -11,6 +11,7 @@ import secrets
 from dotenv import load_dotenv
 import datetime
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
 
 load_dotenv()
 
@@ -67,6 +68,24 @@ async def criar_relato(
     """
     Cria um novo relato, salvando o anexo diretamente no banco de dados.
     """
+
+    # --- INÍCIO DO CÓDIGO DE DIAGNÓSTICO ---
+    print("--- INICIANDO DIAGNÓSTICO DE DATA ---")
+    
+    # DEBUG 1: Vamos ver o tipo e o valor exato que o FastAPI nos entrega
+    print(f"DEBUG: Tipo de 'data_ocorrido' recebido: {type(data_ocorrido)}")
+    print(f"DEBUG: Valor de 'data_ocorrido' recebido: {data_ocorrido}")
+
+    # DEBUG 2: Vamos perguntar diretamente ao banco qual fuso horário a SESSÃO ATUAL está usando
+    try:
+        timezone_query = db.execute(text("SHOW TIMEZONE")).scalar_one()
+        print(f"DEBUG: Fuso horário da SESSÃO do banco: {timezone_query}")
+    except Exception as e:
+        print(f"DEBUG: Erro ao checar o timezone da sessão: {e}")
+    
+    print("------------------------------------")
+    # --- FIM DO CÓDIGO DE DIAGNÓSTICO ---
+
 
     db_relato = models.Relato(
         nome=nome,
