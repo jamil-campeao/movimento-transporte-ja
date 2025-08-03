@@ -91,7 +91,7 @@ async def criar_relato(
         nome=nome,
         contato=contato,
         instituicao=instituicao,
-        data_ocorrido=data_ocorrido,
+        data_ocorrido=data_ocorrido.isoformat(),
         relato_texto=relato_texto,
     )
 
