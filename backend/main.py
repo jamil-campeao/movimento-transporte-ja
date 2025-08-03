@@ -80,7 +80,7 @@ async def criar_relato(
             db_anexo = models.Anexo(
                 filename=anexo_data.filename,
                 mimetype=anexo_data.mimetype,
-                dados=anexo_data.dados,
+                dados_base64=anexo_data.dados_base64,
                 relato_id=db_relato.id
             )
             db.add(db_anexo)

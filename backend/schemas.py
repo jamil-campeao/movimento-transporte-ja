@@ -6,17 +6,14 @@ import datetime
 class AnexoCreate(BaseModel):
     filename: str
     mimetype: str
-    # Usamos um alias: o JSON terá 'dados_base64', mas no nosso código Python usaremos 'dados'
-    dados: str = Field(alias="dados_base64")
+    dados_base64: str
 
 # Schema para ENVIAR dados de um anexo salvo para o frontend
 class Anexo(BaseModel):
     id: int
     filename: str
     mimetype: str
-    # O mesmo alias aqui, para consistência.
-    dados: str = Field(alias="dados_base64")
-
+    dados_base64: str
     class Config:
         orm_mode = True
 

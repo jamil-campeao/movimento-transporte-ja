@@ -22,7 +22,7 @@ class Anexo(Base):
     id = Column(Integer, primary_key=True, index=True)
     filename = Column(String)
     mimetype = Column(String)
-    dados = Column(Text)
+    dados_base64 = Column(Text)
     
     # Chave estrangeira que liga o anexo ao seu relato correspondente
     relato_id = Column(Integer, ForeignKey("relatos.id"))
