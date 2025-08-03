@@ -1,5 +1,5 @@
 # models.py
-from sqlalchemy import Column, Integer, String, LargeBinary, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -22,7 +22,7 @@ class Anexo(Base):
     id = Column(Integer, primary_key=True, index=True)
     filename = Column(String)
     mimetype = Column(String)
-    dados = Column(LargeBinary)
+    dados = Column(Text)
     
     # Chave estrangeira que liga o anexo ao seu relato correspondente
     relato_id = Column(Integer, ForeignKey("relatos.id"))

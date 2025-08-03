@@ -56,58 +56,32 @@ app.add_middleware(
 
 @app.post("/relatos/", response_model=schemas.Relato, status_code=201)
 async def criar_relato(
+    payload: schemas.RelatoCreatePayload,
     db: Session = Depends(get_db),
-    nome: str = Form(...),
-    relato_texto: str = Form(...),
-    contato: Optional[str] = Form(None),
-    anexos: List[UploadFile] = File(None),
-    instituicao: str = Form(...),
-    data_ocorrido: datetime.date = Form(...),
     api_key: str = Depends(get_api_key)
 ):
     """
     Cria um novo relato, salvando o anexo diretamente no banco de dados.
     """
 
-    # --- INÍCIO DO CÓDIGO DE DIAGNÓSTICO ---
-    print("--- INICIANDO DIAGNÓSTICO DE DATA ---")
-    
-    # DEBUG 1: Vamos ver o tipo e o valor exato que o FastAPI nos entrega
-    print(f"DEBUG: Tipo de 'data_ocorrido' recebido: {type(data_ocorrido)}")
-    print(f"DEBUG: Valor de 'data_ocorrido' recebido: {data_ocorrido}")
-
-    # DEBUG 2: Vamos perguntar diretamente ao banco qual fuso horário a SESSÃO ATUAL está usando
-    try:
-        timezone_query = db.execute(text("SHOW TIMEZONE")).scalar_one()
-        print(f"DEBUG: Fuso horário da SESSÃO do banco: {timezone_query}")
-    except Exception as e:
-        print(f"DEBUG: Erro ao checar o timezone da sessão: {e}")
-    
-    print("------------------------------------")
-    # --- FIM DO CÓDIGO DE DIAGNÓSTICO ---
-
-
     db_relato = models.Relato(
-        nome=nome,
-        contato=contato,
-        instituicao=instituicao,
-        data_ocorrido=data_ocorrido.isoformat(),
-        relato_texto=relato_texto,
+        nome=payload.nome,
+        contato=payload.contato,
+        instituicao=payload.instituicao,
+        data_ocorrido=payload.data_ocorrido,
+        relato_texto=payload.relato_texto,
     )
-
     db.add(db_relato)
     db.commit()
     db.refresh(db_relato)
 
-    if anexos:
-        for anexo_file in anexos:
-            dados_do_anexo = await anexo_file.read()
-            
+    if payload.anexos:
+        for anexo_data in payload.anexos:
             db_anexo = models.Anexo(
-                filename=anexo_file.filename,
-                mimetype=anexo_file.content_type,
-                dados=dados_do_anexo,
-                relato_id=db_relato.id  # <-- Vincula o anexo ao ID do relato criado
+                filename=anexo_data.filename,
+                mimetype=anexo_data.mimetype,
+                dados=anexo_data.dados,
+                relato_id=db_relato.id
             )
             db.add(db_anexo)
     
@@ -128,34 +102,16 @@ def listar_todos_relatos(db: Session = Depends(get_db),
 @app.get("/relatos/newest", response_model=List[schemas.Relato])
 def listar_ultimos_relatos(db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
     """
-    Retorna os 7 relatos mais recentes, já incluindo seus anexos.
+    Retorna os 5 relatos mais recentes, já incluindo seus anexos.
     """
     relatos = (
         db.query(models.Relato)
         .options(joinedload(models.Relato.anexos)) # <-- Carrega os anexos na mesma consulta
         .order_by(models.Relato.id.desc())         # <-- Ordena do mais novo para o mais antigo
-        .limit(7)                                  # <-- Limita o resultado a 7 registros
+        .limit(5)                                  # <-- Limita o resultado a 5 registros
         .all()                                     # <-- Executa a consulta
     )
     return relatos
-
-# @app.get("/relatos/{relato_id}/anexo")
-# async def obter_anexo_do_relato(relato_id: int, db: Session = Depends(get_db),
-#                                 api_key: str = Depends(get_api_key)
-# ):
-#     """
-#     Busca um relato pelo ID e retorna seu anexo como uma resposta de imagem.
-#     """
-#     db_relato = db.query(models.Relato).filter(models.Relato.id == relato_id).first()
-
-#     if not db_relato:
-#         raise HTTPException(status_code=404, detail="Relato não encontrado")
-    
-#     if not db_relato.anexo_dados or not db_relato.anexo_mimetype:
-#         raise HTTPException(status_code=404, detail="Este relato não possui anexo")
-
-#     # Retorna os dados binários com o tipo de conteúdo correto para o navegador
-#     return Response(content=db_relato.anexo_dados, media_type=db_relato.anexo_mimetype)
 
 
 @app.get("/")
