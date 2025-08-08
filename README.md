@@ -16,7 +16,7 @@ Este projeto é uma plataforma criada pela comissão de estudantes e docentes da
 
 # ADI Endpoints
 
-A API está disponível em: https://movimento-transporte-ja-production.up.railway.app
+A API está disponível em: https://movimento-transporte-ja-production.up.railway.app/docs
 
 
 # Autores
